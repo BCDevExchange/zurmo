@@ -40,8 +40,16 @@ RUN cd /var/www \
   && rm -Rf temp \
   && mv app html
 
+RUN useradd -m -p blahblah zurmo
+
 COPY php.ini /usr/local/etc/php/
 RUN chown -R www-data /var/www
 VOLUME /var/www/
 
+
+RUN setcap 'cap_net_bind_service=+ep' /usr/sbin/apache2
+RUN chown -R www-data /var/run/apache2/
+RUN chown -R www-data /var/log/apache2/
+
+USER www-data
 CMD ["/usr/sbin/apachectl", "-DFOREGROUND", "-kstart"]
