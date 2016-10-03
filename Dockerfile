@@ -40,5 +40,8 @@ RUN cd /var/www \
   && rm -Rf temp \
   && mv app html
 
+COPY php.ini /usr/local/etc/php/
 RUN chown -R www-data /var/www
 VOLUME /var/www/
+
+CMD ["/usr/sbin/apachectl", "-DFOREGROUND", "-kstart"]
