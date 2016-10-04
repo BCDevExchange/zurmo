@@ -54,7 +54,7 @@
     $instanceConfig   = array(); //Set any parameters you want to have merged into configuration array.
                                  //@see CustomManagement
     $instanceConfig['components']['request']['hostInfo']         = 'http://zurmo-devex-zurmocrm-dev.pathfinder.gov.bc.ca';
-    $instanceConfig['components']['request']['scriptUrl']         = '/zurmo/app/index.php';
+    $instanceConfig['components']['request']['scriptUrl']         = 'index.php';
 
     $urlManager = array (); // Set any parameters you want to customize url manager.
 
