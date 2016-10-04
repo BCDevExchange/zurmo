@@ -1,0 +1,176 @@
+{
+    "kind": "Template",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "memcached",
+        "creationTimestamp": null
+    },
+    "objects": [
+        {
+            "kind": "DeploymentConfig",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "memcached",
+                "creationTimestamp": null,
+                "labels": {
+                    "template": "memcached-template"
+                }
+            },
+            "spec": {
+                "strategy": {
+                    "type": "Recreate",
+                    "resources": {}
+                },
+                "triggers": [
+                    {
+                        "type": "ImageChange",
+                        "imageChangeParams": {
+                            "automatic": true,
+                            "containerNames": [
+                                "memcached-container"
+                            ],
+                            "from": {
+                                "kind": "ImageStreamTag",
+                                "name": "${image_url}"
+                            }
+                        }
+                    },
+                    {
+                        "type": "ConfigChange"
+                    }
+                ],
+                "replicas": 1,
+                "selector": {
+                    "name": "memcached"
+                },
+                "template": {
+                    "metadata": {
+                        "creationTimestamp": null,
+                        "labels": {
+                            "name": "memcached"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "memcached-container",
+                                "image": "${image_url}",
+                                "ports": [
+                                    {
+                                        "containerPort": 11211,
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "env": [
+                                    {
+                                        "name": "port",
+                                        "value": "11211"
+                                    },
+                                    {
+                                        "name": "maxconn",
+                                        "value": "${maxconn}"
+                                    },
+                                    {
+                                        "name": "cache_size",
+                                        "value": "${cache_size}"
+                                    },
+                                    {
+                                        "name": "threads",
+                                        "value": "${threads}"
+                                    },
+                                    {
+                                        "name": "options",
+                                        "value": "${options}"
+                                    },
+                                    {
+                                        "name": "verbose",
+                                        "value": "${verbose}"
+                                    },
+                                    {
+                                        "name": "debug",
+                                        "value": "${debug}"
+                                    }
+                                ],
+                                "resources": {},
+                                "terminationMessagePath": "/dev/termination-log",
+                                "imagePullPolicy": "Always",
+                                "securityContext": {
+                                    "capabilities": {},
+                                    "privileged": false
+                                }
+                            }
+                        ],
+                        "restartPolicy": "Always",
+                        "terminationGracePeriodSeconds": 30,
+                        "dnsPolicy": "ClusterFirst",
+                        "securityContext": {}
+                    }
+                }
+            },
+            "status": {}
+        },
+        {
+            "kind": "Service",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "memcached",
+                "creationTimestamp": null,
+                "labels": {
+                    "template": "memcached-template"
+                }
+            },
+            "spec": {
+                "ports": [
+                    {
+                        "name": "public-port",
+                        "protocol": "TCP",
+                        "port": 11211,
+                        "targetPort": 11211
+                    }
+                ],
+                "selector": {
+                    "name": "memcached"
+                },
+                "type": "ClusterIP",
+                "sessionAffinity": "None"
+            },
+            "status": {
+                "loadBalancer": {}
+            }
+        }
+    ],
+    "parameters": [
+                {
+                    "name": "maxconn",
+                    "value": "1024",
+                    "description": "max number of connections"
+                },
+                {
+                    "name": "cache_size",
+                    "value": "64",
+                    "description": "cache size in MBs"
+                },
+                {
+                    "name": "threads",
+                    "value": "4",
+                    "description": "thread count"
+                },
+                {
+                    "name": "options",
+                    "value": "",
+                    "description": "additional command line options"
+                },
+                {
+                    "name": "verbose",
+                    "value": "true"
+                },
+                {
+                    "name": "debug",
+                    "value": "false"
+                },
+                {
+                    "name": "image_url",
+                    "value": "memcached:latest"
+                }
+    ]
+}

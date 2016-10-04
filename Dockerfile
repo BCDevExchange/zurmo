@@ -1,38 +1,5 @@
 FROM php:5.6-apache
 
-# ----- memcache
-RUN groupadd -r memcache && useradd -r -g memcache memcache
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    libevent-2.0-5 \
-  && rm -rf /var/lib/apt/lists/*
-
-ENV MEMCACHED_VERSION 1.4.31
-ENV MEMCACHED_SHA1 3ea34f5bc5c5aacb76cfc07f4ee5847f33526cb6
-
-RUN buildDeps=' \
-    gcc \
-    libc6-dev \
-    libevent-dev \
-    make \
-    perl \
-    wget \
-  ' \
-  && set -x \
-  && apt-get update && apt-get install -y $buildDeps --no-install-recommends \
-  && rm -rf /var/lib/apt/lists/* \
-  && wget -O memcached.tar.gz "http://memcached.org/files/memcached-$MEMCACHED_VERSION.tar.gz" \
-  && echo "$MEMCACHED_SHA1  memcached.tar.gz" | sha1sum -c - \
-  && mkdir -p /usr/src/memcached \
-  && tar -xzf memcached.tar.gz -C /usr/src/memcached --strip-components=1 \
-  && rm memcached.tar.gz \
-  && cd /usr/src/memcached \
-  && ./configure \
-  && make -j$(nproc) \
-  && make install \
-  && cd / && rm -rf /usr/src/memcached \
-  && apt-get purge -y --auto-remove $buildDeps
-
 # ----- apache
 ENV ZURMO_VERSION "3.1.5"
 ENV PHP_TIMEZONE "Australia/Sydney"
@@ -79,12 +46,6 @@ RUN setcap 'cap_net_bind_service=+ep' /usr/sbin/apache2
 RUN chown -R www-data /var/www
 RUN chown -R www-data /var/run/apache2/
 RUN chown -R www-data /var/log/apache2/
-
-# -------
-USER memcache
-EXPOSE 11211
-CMD ["memcached"]
-# -------
 
 VOLUME /var/www/
 USER www-data
