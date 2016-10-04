@@ -47,6 +47,8 @@ RUN chown -R www-data /var/www
 RUN chown -R www-data /var/run/apache2/
 RUN chown -R www-data /var/log/apache2/
 
+ADD config /var/www/html/protected/config
+
 VOLUME /var/www/
 USER www-data
 EXPOSE 80
