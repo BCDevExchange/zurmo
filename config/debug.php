@@ -44,7 +44,7 @@
 
     // Turn this on to see RedBean queries. Turn it off in production.
     // Check it in as false!
-    $redBeanDebugOn = true;
+    $redBeanDebugOn = false;
 
     // Turn this on to save RedBean queries into file. Turn it off in production.
     // Check it in as false!

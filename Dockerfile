@@ -2,7 +2,7 @@ FROM php:5.6-apache
 
 # ----- apache
 ENV ZURMO_VERSION "3.1.5"
-ENV PHP_TIMEZONE "Australia/Sydney"
+ENV PHP_TIMEZONE "America/Los_Angeles"
 
 RUN apt-get update --no-install-recommends \
   && apt-get -yq upgrade --no-install-recommends \
