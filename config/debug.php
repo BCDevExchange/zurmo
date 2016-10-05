@@ -36,7 +36,7 @@
 
     // Keep this on ALL THE TIME WHEN DEVELOPING. Turn it off in production.
     // Check it in as false!
-    $debugOn = true;
+    $debugOn = false;
 
     // Turn this on to see additional performance information. Turn it off in production.
     // Check it in as true!
