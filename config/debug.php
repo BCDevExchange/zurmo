@@ -44,7 +44,7 @@
 
     // Turn this on to see RedBean queries. Turn it off in production.
     // Check it in as false!
-    $redBeanDebugOn = false;
+    $redBeanDebugOn = true;
 
     // Turn this on to save RedBean queries into file. Turn it off in production.
     // Check it in as false!
@@ -52,7 +52,7 @@
 
     // Turn this on to see extra query data such as total count, duplicate count, and duplicate queries
     // Check it in as false!
-    $queryDataOn = false;
+    $queryDataOn = true;
 
     // Turn this off to use php to do permissions, rights, and polices.
     // Use this to comparatively test the mysql stored functions and procedures.
