@@ -36,7 +36,7 @@
 
     // Keep this on ALL THE TIME WHEN DEVELOPING. Turn it off in production.
     // Check it in as false!
-    $debugOn = false;
+    $debugOn = true;
 
     // Turn this on to see additional performance information. Turn it off in production.
     // Check it in as true!
@@ -44,7 +44,7 @@
 
     // Turn this on to see RedBean queries. Turn it off in production.
     // Check it in as false!
-    $redBeanDebugOn = false;
+    $redBeanDebugOn = true;
 
     // Turn this on to save RedBean queries into file. Turn it off in production.
     // Check it in as false!
