@@ -1,7 +1,7 @@
 <?php
     /*********************************************************************************
      * Zurmo is a customer relationship management program developed by
-     * Zurmo, Inc. Copyright (C) 2014 Zurmo Inc.
+     * Zurmo, Inc. Copyright (C) 2015 Zurmo Inc.
      *
      * Zurmo is free software; you can redistribute it and/or modify it under
      * the terms of the GNU Affero General Public License version 3 as published by the
@@ -31,7 +31,7 @@
      * these Appropriate Legal Notices must retain the display of the Zurmo
      * logo and Zurmo copyright notice. If the display of the logo is not reasonably
      * feasible for technical reasons, the Appropriate Legal Notices must display the words
-     * "Copyright Zurmo Inc. 2014. All rights reserved".
+     * "Copyright Zurmo Inc. 2015. All rights reserved".
      ********************************************************************************/
 
     // Keep this on ALL THE TIME WHEN DEVELOPING. Turn it off in production.
@@ -57,7 +57,7 @@
     // Turn this off to use php to do permissions, rights, and polices.
     // Use this to comparatively test the mysql stored functions and procedures.
     // Check it in as true!
-    $securityOptimized = true;
+    $securityOptimized = false;
 
     // Turn this off to use AuditEvent to do write audit entries when
     // the database is frozen. When it is not frozen it will always be used.
@@ -80,7 +80,7 @@
     // memcache. A model's related models are not serialized
     // along with it.
     // Check it in as true!
-    $memcacheLevelCaching = true;
+    $memcacheLevelCaching = false;
 
     // Turn this off to test without db level caching of permissions.
     // Check it in as true!
@@ -98,7 +98,7 @@
     $xhtmlValidation = false;
 
     // Should Crash reports be automatically submitted to Sentry
-    $submitCrashToSentry = false;
+    $submitCrashToSentry = true;
 
     // Set information related to function tests
     // 1. $seleniumServerPath is path to selenium server(selenium jar file)
